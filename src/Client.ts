@@ -24,6 +24,7 @@ import GamePacketWrapper from './network/raknet/GamePacketWrapper'
 import NewIncomingConnection from './network/raknet/NewIncomingConnection'
 import Reliability from './network/raknet/Reliability'
 import Player from './Player'
+import AddPlayerPacket from './network/bedrock/AddPlayerPacket';
 
 export default class Client {
 
@@ -365,6 +366,13 @@ export default class Client {
     this.sendPacket(packet)
 
     this.sendPacket(new AvailableEntityIdentifiers())
+    this.sendAddPlayer()
+  }
+
+  private sendAddPlayer() {
+    const packet = new AddPlayerPacket()
+
+    this.sendPacket(packet)
   }
 
 }
