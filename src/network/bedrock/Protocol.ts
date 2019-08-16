@@ -7,6 +7,7 @@ enum Protocol {
 
   SET_TIME = 0x0a, // 10
   START_GAME = 0x0b, // 11
+  ADD_PLAYER = 0x0c, // 12
 
   SET_HEALTH = 0x2a, // 42
 
