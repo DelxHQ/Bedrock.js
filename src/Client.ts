@@ -24,7 +24,6 @@ import GamePacketWrapper from './network/raknet/GamePacketWrapper'
 import NewIncomingConnection from './network/raknet/NewIncomingConnection'
 import Reliability from './network/raknet/Reliability'
 import Player from './Player'
-import AddPlayerPacket from './network/bedrock/AddPlayerPacket';
 
 export default class Client {
 
@@ -213,7 +212,7 @@ export default class Client {
       this.datagramQueue.forEach(async (datagram, index) => {
         if(i > limit) return
 
-        // this.recoveryQueue.set(datagram.sequenceNumber, datagram)
+        this.recoveryQueue.set(datagram.sequenceNumber, datagram)
         this.server.send(datagram.encode(), this.address)
         this.datagramQueue.splice(index, 1)
 
@@ -366,13 +365,6 @@ export default class Client {
     this.sendPacket(packet)
 
     this.sendPacket(new AvailableEntityIdentifiers())
-    this.sendAddPlayer()
-  }
-
-  private sendAddPlayer() {
-    const packet = new AddPlayerPacket()
-
-    this.sendPacket(packet)
   }
 
 }

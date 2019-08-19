@@ -10,6 +10,7 @@
     "tslint": "tslint --project tsconfig.json"
   },
   "dependencies": {
+    "@types/uuid": "^3.4.5",
     "bytebuffer": "^5.0.1",
     "chalk": "^2.4.2",
     "math3d": "^0.2.2",
