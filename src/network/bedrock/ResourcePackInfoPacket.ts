@@ -11,7 +11,7 @@ export default class ResourcePackInfoPacket extends EncapsulatedPacket {
   private behaviorPackEntries: Array<ResourcePack> = []
 
   constructor() {
-    super(Packet.RESOURCE_PACKS_INFO_PACKET)
+    super(Packet.RESOURCE_PACKS_INFO)
   }
 
   protected encodeBody() {
