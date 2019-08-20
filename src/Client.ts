@@ -361,7 +361,7 @@ export default class Client {
 
     this.protocol = packet.protocol
 
-    this.sendPlayStatus(PlayStatusIndicator.OutdatedClient)
+    this.sendPlayStatus(PlayStatusIndicator.Okay)
     this.sendStartGame()
   }
 
