@@ -23,5 +23,4 @@ Without the following repositories as a constant reference, this project would n
 -   falkirks ([falkirks/DirtServer](https://github.com/falkirks/DirtServer))
 
 ## Links
--   [Discord](https://discord.gg/W2KZBzC)
--   [Subscribe to PewDiePie](https://www.youtube.com/subscription_center?add_user=PewDiePie)
+-   [Discord](https://discord.gg/uDhn7zM)
