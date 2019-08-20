@@ -24,6 +24,8 @@ import GamePacketWrapper from './network/raknet/GamePacketWrapper'
 import NewIncomingConnection from './network/raknet/NewIncomingConnection'
 import Reliability from './network/raknet/Reliability'
 import Player from './Player'
+import ResourcePackInfoPacket from './network/bedrock/ResourcePackInfoPacket';
+import DisconnectPacket from './network/bedrock/DisconnectPacket';
 
 export default class Client {
 
@@ -267,6 +269,8 @@ export default class Client {
 
   private sendPacket(packet: GamePacket, immediate = false, needACK = false) {
     this.queueEncapsulatedPacket(packet, immediate)
+
+    this.logger.debug(`-> ${packet.getId()}`)
   }
 
   private sendPlayStatus(status: PlayStatusIndicator, immediate = false) {
@@ -328,6 +332,8 @@ export default class Client {
   }
 
   private handleGamePacket(packet: GamePacketWrapper) {
+    this.logger.debug(`<-`, packet.getId())
+
     const payload = zlib.unzipSync(packet.getStream().buffer.slice(1))
     const pStream = new BinaryStream(payload)
 
@@ -355,7 +361,7 @@ export default class Client {
 
     this.protocol = packet.protocol
 
-    this.sendPlayStatus(PlayStatusIndicator.Okay)
+    this.sendPlayStatus(PlayStatusIndicator.OutdatedClient)
     this.sendStartGame()
   }
 
@@ -365,6 +371,13 @@ export default class Client {
     this.sendPacket(packet)
 
     this.sendPacket(new AvailableEntityIdentifiers())
+    this.sendPacksInfo()
+  }
+
+  private sendPacksInfo() {
+    const packet = new ResourcePackInfoPacket()
+
+    this.sendPacket(packet)
   }
 
 }
