@@ -26,6 +26,7 @@ import Reliability from './network/raknet/Reliability'
 import Player from './Player'
 import ResourcePackInfoPacket from './network/bedrock/ResourcePackInfoPacket';
 import DisconnectPacket from './network/bedrock/DisconnectPacket';
+import ResourcePackStackPacket from './network/bedrock/ResourcePackStackPacket';
 
 export default class Client {
 
@@ -377,6 +378,13 @@ export default class Client {
   private sendPacksInfo() {
     const packet = new ResourcePackInfoPacket()
 
+    this.sendPacket(packet)
+    this.sendPacksStack()
+  }
+
+  private sendPacksStack() {
+    const packet = new ResourcePackStackPacket()
+    
     this.sendPacket(packet)
   }
 
